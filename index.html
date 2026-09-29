@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SurePoint 오프보딩</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+input[type=file]{display:none!important}
+[hidden]{display:none!important}
+:root{
+  --brand:#2c4a7e;--brand-2:#5a79b8;--brand-strong:#213a66;--brand-soft:#e9eef8;
+  --ink:#0a0e1c;--ok:#12b886;--ok-soft:#e3f8f0;--warn:#e08a00;--danger:#e5484d;
+  --bg:#f4f5fb;--surface:#fff;--surface-2:#f0f2f9;--border:#e4e7f2;--border-strong:#d3d8ea;
+  --text:#141a2e;--muted:#5f677f;--faint:#9aa2bd;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --serif:"Noto Serif KR",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f1e;--surface:#141a2d;--surface-2:#1a2136;--border:#28304a;--border-strong:#333c5c;--text:#e9ebf7;--muted:#9aa2c2;--faint:#6b7398;--brand-soft:#1e2740}}
+:root[data-theme="dark"]{--bg:#0b0f1e;--surface:#141a2d;--surface-2:#1a2136;--border:#28304a;--border-strong:#333c5c;--text:#e9ebf7;--muted:#9aa2c2;--faint:#6b7398;--brand-soft:#1e2740}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.65}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+
+.hero{position:relative;color:#fff;background:var(--ink);overflow:hidden;text-align:center;padding:74px 24px 66px}
+.hero::before{content:"";position:absolute;inset:-30%;background:radial-gradient(42% 42% at 32% 24%,rgba(90,121,184,.5),transparent 60%),radial-gradient(46% 46% at 72% 62%,rgba(44,74,126,.5),transparent 60%);filter:blur(28px)}
+.hero .in{position:relative;z-index:2;max-width:600px;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;color:#9fb4e2;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(25px,4.6vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.25;text-wrap:balance}
+.hero p{font-size:14.5px;color:#cdd6ef;line-height:1.75;margin-top:15px}
+
+.letter{padding:56px 0 8px}
+.letter-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:34px 36px;position:relative;overflow:hidden;box-shadow:0 26px 60px -46px rgba(20,26,46,.4)}
+.letter-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--brand),var(--brand-2))}
+.letter-card .eb{font-family:var(--serif);font-size:14.5px;font-weight:600;color:var(--brand);margin-bottom:16px}
+.letter-card p{font-family:var(--serif);font-size:15px;line-height:1.95;color:var(--text);margin-bottom:14px;word-break:keep-all;text-wrap:pretty}
+.wl-sign{font-family:var(--serif);font-weight:600;text-align:right;margin-top:18px;color:var(--text)}
+
+.section{padding:14px 0}
+.intro{text-align:center;margin:34px 0 24px}
+.stitle{font-size:clamp(20px,3.4vw,25px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.slead{font-size:14px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:0 24px 60px -42px rgba(20,26,46,.4);padding:24px;display:flex;flex-direction:column;gap:18px}
+.block h3{font-size:16px;font-weight:800;margin-bottom:3px}
+.block .bd{font-size:12.8px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.block.gap-top{margin-top:30px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}.f.full{grid-column:1/-1}
+.f label{font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px}.f .r{color:var(--danger)}
+.f input,.f select,.f textarea{width:100%;padding:11px 13px;border:1px solid var(--border-strong);border-radius:10px;font-size:14px;font-family:inherit;background:var(--surface);color:var(--text);transition:.15s}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(44,74,126,.15)}
+.confirm{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:500;background:#fff8ec;border:1px solid #f4dfae;color:#7a5a12;border-radius:11px;padding:11px 13px;cursor:pointer;grid-column:1/-1}
+.confirm input{width:18px;height:18px;margin-top:1px;accent-color:var(--warn);flex-shrink:0}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+.dash{display:flex;gap:22px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,#1a2440,#0f1730);color:#fff;border-radius:18px;padding:22px 24px}
+.ring{--p:0;width:104px;height:104px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:conic-gradient(var(--ok) calc(var(--p)*1%),rgba(255,255,255,.13) 0);transition:.5s}
+.ring .rin{width:80px;height:80px;border-radius:50%;background:#141d36;display:grid;place-items:center;text-align:center}
+.ring .pct{font-size:23px;font-weight:800;line-height:1}
+.ring .cap{font-size:10px;color:#9fb0d8;margin-top:2px}
+.dash-meta h3{font-size:18px;font-weight:800;margin-bottom:3px}
+.dash-meta h3 .dd{color:#8fe3c2}
+.dash-meta p{font-size:12.5px;color:#b9c4e4}
+
+.grp{border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:12px}
+.grp-h{display:flex;align-items:center;gap:9px;padding:13px 16px;background:var(--surface-2);font-weight:800;font-size:14.5px}
+.tag{font-size:11px;font-weight:800;color:#fff;border-radius:999px;padding:3px 10px}
+.tag.now{background:var(--danger)}.tag.by{background:var(--warn)}.tag.after{background:var(--ok)}
+.grp-b{padding:4px 16px 10px}
+.ck{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px dashed var(--border);cursor:pointer;font-size:13.8px}
+.ck:last-child{border-bottom:none}
+.ck input{width:19px;height:19px;margin-top:1px;accent-color:var(--ok);flex-shrink:0}
+.ck .col{display:flex;flex-direction:column}
+.ck .d{font-size:12px;color:var(--muted);margin-top:2px}
+.ck.on .lab{color:var(--muted);text-decoration:line-through}
+.info-list{list-style:none;padding:6px 2px}
+.info-list li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;font-size:13.5px;color:var(--muted);line-height:1.55}
+.info-list li::before{content:"";flex-shrink:0;width:7px;height:7px;border-radius:50%;background:var(--brand-2);margin-top:7px}
+.info-list b{color:var(--text);font-weight:700}
+
+.doc{border:1px solid var(--border);border-radius:12px;background:var(--surface-2);padding:16px 18px;max-height:340px;overflow-y:auto;font-size:13px;line-height:1.85;color:var(--text)}
+.doc h4{font-size:14px;margin:15px 0 4px;font-weight:800}
+.doc h4:first-child{margin-top:0}
+.doc p{color:var(--muted);margin-bottom:6px}
+.doc .ptbl{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12.5px}
+.doc .ptbl th,.doc .ptbl td{border:1px solid var(--border-strong);padding:7px 9px;text-align:left;vertical-align:top}
+.doc .ptbl th{background:var(--surface);font-weight:700;white-space:nowrap;color:var(--text)}
+.doc .ptbl td{color:var(--text);word-break:break-all}
+.doc .ptbl td input.tcell{width:100%;border:none;background:transparent;font:inherit;color:var(--text);padding:0;outline:none}
+.doc .ptbl td input.tcell::placeholder{color:var(--faint)}
+.doc .sig-close{color:var(--text);text-align:center}
+.doc .sig-close.co{font-weight:800;margin-top:8px}
+.chk{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;cursor:pointer;margin-top:12px}.chk input{width:18px;height:18px;accent-color:var(--brand);flex-shrink:0}
+.sign{border:1.5px dashed var(--border-strong);border-radius:11px;position:relative;height:140px;margin-top:12px}
+.sign canvas{width:100%;height:100%;border-radius:11px;touch-action:none}
+.sign .ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--faint);font-size:13px;pointer-events:none}
+.sign.drawn .ph{display:none}
+.sign .clr{position:absolute;right:9px;bottom:9px;font-size:11.5px;border:1px solid var(--border-strong);background:var(--surface);color:var(--muted);border-radius:8px;padding:5px 9px;cursor:pointer}
+
+.submit{width:100%;padding:16px;border:none;border-radius:14px;font-weight:800;font-size:16px;color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2));cursor:pointer;box-shadow:0 16px 38px -14px rgba(44,74,126,.55);transition:.15s}
+.submit:hover{transform:translateY(-2px)}
+.saved{display:flex;align-items:center;gap:7px;justify-content:center;font-size:12px;color:var(--ok);margin-top:10px}
+.saved .dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.foot{text-align:center;color:var(--faint);font-size:12px;padding:30px 0 56px}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(18px);background:var(--ink);color:#fff;padding:13px 20px;border-radius:12px;font-size:13.5px;font-weight:500;box-shadow:0 14px 36px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.35s cubic-bezier(.16,1,.3,1);z-index:90;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast::before{content:"⚠️  "}
+.flash{animation:flashout 1.5s ease}
+@keyframes flashout{0%,55%{box-shadow:0 0 0 3px var(--danger)}100%{box-shadow:0 0 0 0 transparent}}
+
+.takeover{position:fixed;inset:0;z-index:80;background:var(--ink);color:#fff;display:none;overflow-y:auto}
+.takeover.show{display:flex}
+.tk-in{position:relative;z-index:2;max-width:520px;margin:auto;padding:48px 24px;text-align:center}
+.tk-mark{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:34px;margin:0 auto 22px}
+.tk-in h2{font-size:clamp(24px,5.5vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:14px}
+.tk-in>p{font-size:15px;line-height:1.8;color:#d5ddf3;max-width:42ch;margin:0 auto 30px}
+.tk-btn{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:12px 22px;font-weight:700;font-size:13.5px;cursor:pointer}
+
+@media(max-width:560px){.letter-card{padding:28px 22px}.card{padding:20px}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="in">
+    <div class="eyebrow">SurePoint · Offboarding</div>
+    <h1>Surepoint 퇴사자 오프보딩 가이드</h1>
+    <p>슈어포인트와 함께한 시간에 진심으로 감사드립니다.<br>새로운 시작을 응원하며, 원활한 퇴사 절차를 위해 안내드립니다.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="letter">
+    <div class="letter-card">
+      <div class="eb">감사의 인사</div>
+      <p><b id="lname">안영모</b>님, 그동안 슈어포인트와 함께해 주셔서 감사합니다. 함께한 시간 동안 보여주신 노력에 진심으로 고마운 마음을 전합니다.</p>
+      <p>남은 절차가 번거롭지 않도록 최대한 간단히 준비했어요. 새로운 자리에서의 앞날을 응원하며, 언제든 다시 만날 날을 기대하겠습니다. 🌿</p>
+      <div class="wl-sign">슈어포인트 임직원 일동</div>
+    </div>
+  </section>
+
+  <div class="card" id="form" style="margin-top:34px">
+
+    <div class="block">
+      <h3>퇴사자 정보</h3>
+      <div class="grid">
+        <div class="f"><label>이름 <span class="r">*</span></label><input id="name" placeholder="홍길동"></div>
+        <div class="f"><label>부서 <span class="r">*</span></label><input id="dept" placeholder="경영관리팀"></div>
+        <div class="f"><label>입사일 <span class="r">*</span></label><input id="join" inputmode="numeric" placeholder="2023-03-02" maxlength="10"></div>
+        <div class="f"><label>최종 근무일 <span class="r">*</span></label><input id="last" inputmode="numeric" placeholder="2026-10-31" maxlength="10"></div>
+        <div class="f"><label>퇴사일 <span class="r">*</span></label><input id="leave" inputmode="numeric" placeholder="2026-11-07" maxlength="10"></div>
+        <div class="f"><label>이메일 <span class="r">*</span></label><input id="email" placeholder="example@gmail.com"></div>
+        <div class="f"><label>연락처 <span class="r">*</span></label><input id="phone" inputmode="numeric" placeholder="010-0000-0000" maxlength="13"></div>
+        <div class="f"><label>긴급 연락처</label><input id="emg" inputmode="numeric" placeholder="010-0000-0000" maxlength="13"></div>
+        <div class="f full"><label>주소 <span class="r">*</span></label><input id="addr" placeholder="예: 서울특별시 강남구 테헤란로 123, 4층"></div>
+        <label class="confirm"><input type="checkbox" id="confirmMgmt"><span>⚠️ 최종근무일·퇴사일은 <b>경영관리팀과 확인</b>하였습니다.</span></label>
+      </div>
+    </div>
+
+    <div class="block gap-top">
+      <h3>진행 현황</h3>
+      <div class="bd">체크할 때마다 완료율이 채워져요. 최종 근무일을 입력하면 남은 날짜(D-day)가 표시됩니다.</div>
+      <div class="dash">
+        <div class="ring" id="ring"><div class="rin"><div class="pct" id="ringPct">0%</div><div class="cap">완료</div></div></div>
+        <div class="dash-meta">
+          <h3>마지막 근무일까지 <span class="dd" id="dday">D-—</span></h3>
+          <p>지금 / 마지막 날까지 할 일을 아래에서 하나씩 처리하세요. 퇴사 후 정산은 회사가 진행합니다.</p>
+        </div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="tag now">지금</span> 바로 착수</div>
+        <div class="grp-b">
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">직속 상사·경영관리팀에 퇴사 의사 전달</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">사직서 기안 상신</span><span class="d">하이웍스 › 전자결재 › 사직서 양식</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">인수인계 대상·일정 협의</span></span></label>
+        </div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="tag by">마지막 날까지</span> 완료</div>
+        <div class="grp-b">
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">담당 업무·프로젝트 현황 문서화</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">고객·협력업체 인계 (해당 시)</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">비밀번호·접근권한 목록 작성 및 인계</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">회사 자산 반납</span><span class="d">노트북·태블릿, 사원증·출입카드, 법인·하이패스카드, 업무문서, 자료, USB, 사물함이나 서랍장 열쇠, 기타 회사에서 지급받은 물품</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">개인 데이터 백업</span><span class="d">권한 회수 전 반드시 백업</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">하이웍스·사내 클라우드 접근권한 회수</span></span></label>
+          <label class="ck"><input type="checkbox"><span class="col"><span class="lab">퇴사(비밀유지) 서약서 서명</span><span class="d">아래 ‘퇴사 서약서’에서 진행</span></span></label>
+        </div>
+      </div>
+
+      <div class="grp"><div class="grp-h"><span class="tag after">퇴사 후</span> 회사가 진행 · 안내</div>
+        <div class="grp-b">
+          <ul class="info-list">
+            <li><b>퇴직금 지급</b> (해당자) — 퇴사일로부터 <b>14일 이내</b></li>
+            <li><b>급여·소득세·4대보험 정산</b> — 퇴사 <b>+1개월 급여일</b>에 반영(송금 또는 환급)</li>
+            <li><b>원천징수영수증 · 경력/재직증명서</b> — 필요 시 경영관리팀에 발급 요청</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="block gap-top">
+      <h3>퇴사(비밀유지) 서약서 <span style="color:var(--danger)">*</span></h3>
+      <div class="bd">아래 내용을 확인하고 동의·서명해 주세요. 성명·부서·연락처는 위 입력값이 자동 반영됩니다.</div>
+      <div class="doc">
+        <table class="ptbl">
+          <tr><th>성명</th><td id="pName">___</td><th>주민등록번호 <span style="color:var(--danger)">*</span></th><td><input id="rrn" class="tcell" placeholder="980913-1000000" autocomplete="off"></td></tr>
+          <tr><th>부서</th><td id="pDept">___</td><th>연락처</th><td id="pPhone">___</td></tr>
+          <tr><th>주소</th><td id="pAddr" colspan="3">___</td></tr>
+        </table>
+        <p style="color:var(--text)">본인은 ㈜슈어포인트(이하 "회사"라 함)를 퇴사함에 있어 다음 사항을 성실히 준수할 것을 서약합니다.</p>
+        <h4>제1조 (비밀유지 의무)</h4>
+        <p>1. 본인은 재직 중 업무상 알게 된 회사의 영업비밀, 기술정보, 고객정보, 인사정보 등 회사의 모든 기밀사항을 퇴직 후에도 제3자에게 누설하거나 공개하지 않겠습니다.</p>
+        <p>2. 본인은 회사의 기밀정보를 이용하여 회사에 손해를 끼치는 행위를 하지 않겠습니다.</p>
+        <p>3. 본 조항은 퇴직 후에도 유효하며, 위반 시 민·형사상 책임을 질 것을 서약합니다.</p>
+        <h4>제2조 (회사 자산 반납)</h4>
+        <p>1. 본인은 회사로부터 제공받은 모든 자산(노트북, 휴대폰, 출입카드, 명함, 업무 문서, 자료 등)을 최종 근무일까지 반납할 것을 약속합니다.</p>
+        <p>2. 회사 자산의 분실 또는 파손에 대해서는 그에 상응하는 책임을 질 것을 서약합니다.</p>
+        <h4>제3조 (업무 데이터 삭제)</h4>
+        <p>1. 본인은 개인 소유의 저장장치(개인 PC, 노트북, USB, 클라우드 등)에 보관된 회사의 모든 업무 관련 데이터를 삭제할 것을 약속합니다.</p>
+        <p>2. 퇴사 후 회사 업무 관련 자료를 보유하고 있지 않음을 확인합니다.</p>
+        <h4>제4조 (경업금지 의무)</h4>
+        <p>1. 본인은 퇴직 후 1년간 회사와 직접적으로 경쟁하는 동종 업계에 취업하거나, 동종 사업을 영위하지 않을 것을 원칙으로 합니다.</p>
+        <p>2. 부득이한 사유로 동종 업계 취업 시, 회사에 사전 통보하고 협의하겠습니다.</p>
+        <h4>제5조 (위반 시 책임)</h4>
+        <p>본 서약을 위반하여 회사에 손해가 발생한 경우, 본인은 민·형사상 모든 책임을 지며, 회사가 입은 손해를 배상할 것을 서약합니다.</p>
+        <p class="sig-close" id="pDateLine" style="margin-top:16px">​</p>
+        <p class="sig-close">서약자 성명: <b id="pSignName">미입력</b></p>
+        <p class="sig-close co">㈜슈어포인트 대표이사 귀중</p>
+      </div>
+      <label class="chk"><input type="checkbox" id="agree">위 서약 내용에 동의하며, 이에 서명합니다.</label>
+      <div class="sign" id="sign"><canvas id="cv"></canvas><div class="ph">여기에 서명해 주세요</div><button class="clr" id="clr" type="button">지우기</button></div>
+    </div>
+
+    <button class="submit" id="submit">퇴사 절차 정보 제출하기</button>
+    <div class="saved" id="saved" hidden><span class="dot"></span>작성 내용이 자동 저장되었어요</div>
+  </div>
+</div>
+
+<div class="foot">문의 · 경영관리팀 · yurim@surepoint.kr</div>
+
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+<div class="takeover" id="takeover">
+  <div class="tk-in">
+    <div class="tk-mark">🌿</div>
+    <h2 id="tkTitle">제출이 완료되었습니다</h2>
+    <p id="tkMsg">그동안 감사했습니다.<br>남은 절차는 경영관리팀이 확인 후 안내드릴게요.</p>
+    <button class="tk-btn" id="again">처음으로</button>
+  </div>
+</div>
+
+<script>
+const SUBMIT_URL="https://script.google.com/macros/s/AKfycbyTbur1fIx_xIT2zQq15-GKbLjgQzB1PKee0HXcWbY8bh06s3zwFLr3dPyskMzNDgot/exec";   // 온보딩과 동일한 웹앱(퇴사 분기 포함). 비우면 JSON 파일로 저장
+const STORAGE_KEY="surepoint_offboarding_aym";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const TEXT_IDS=["name","dept","join","last","leave","phone","emg","email","addr","rrn"];
+
+var PLEDGE_ISO="";
+(function(){const d=new Date();const y=d.getFullYear(),m=d.getMonth()+1,day=d.getDate();PLEDGE_ISO=`${y}-${String(m).padStart(2,'0')}-${String(day).padStart(2,'0')}`;$("#pDateLine").textContent=`${y}년 ${m}월 ${day}일`;})();
+
+function fmtDate(el){let v=el.value.replace(/\D/g,"").slice(0,8);if(v.length>=5)v=v.slice(0,4)+"-"+v.slice(4,6)+(v.length>6?"-"+v.slice(6):"");else if(v.length>=3)v=v.slice(0,4);el.value=v;}
+function fmtPhone(el){let v=el.value.replace(/\D/g,"").slice(0,11);if(v.length>=7)v=v.slice(0,3)+"-"+v.slice(3,7)+"-"+v.slice(7);else if(v.length>=4)v=v.slice(0,3)+"-"+v.slice(3);el.value=v;}
+["join","last","leave"].forEach(id=>$("#"+id).addEventListener("input",e=>{fmtDate(e.target);sync();save();}));
+["phone","emg"].forEach(id=>$("#"+id).addEventListener("input",e=>{fmtPhone(e.target);save();}));
+TEXT_IDS.forEach(id=>{const el=$("#"+id);if(el)el.addEventListener("input",()=>{sync();save();});});
+$("#confirmMgmt").addEventListener("change",save);
+$("#agree").addEventListener("change",save);
+
+function sync(){
+  $("#lname").textContent=$("#name").value.trim()||"안영모";
+  $("#pName").textContent=$("#name").value.trim()||"___";
+  $("#pDept").textContent=$("#dept").value.trim()||"___"; $("#pPhone").textContent=$("#phone").value.trim()||"___";
+  $("#pAddr").textContent=$("#addr").value.trim()||"___";
+  $("#pSignName").textContent=$("#name").value.trim()||"미입력";
+  const last=$("#last").value.trim(),dd=$("#dday");
+  if(/^\d{4}-\d{2}-\d{2}$/.test(last)){
+    const t=new Date(last+"T18:30:00"),now=new Date();
+    const diff=Math.ceil((t-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);
+    dd.textContent = diff>0?("D-"+diff) : (diff===0?"D-DAY":"완료");
+  }else dd.textContent="D-—";
+}
+
+function recalc(){
+  const boxes=$$('.grp .ck input[type=checkbox]');
+  const done=boxes.filter(b=>b.checked).length;
+  const pct=boxes.length?Math.round(done/boxes.length*100):0;
+  $("#ring").style.setProperty('--p',pct);$("#ringPct").textContent=pct+'%';
+}
+$$('.grp .ck input').forEach(inp=>inp.addEventListener('change',e=>{e.target.closest('.ck').classList.toggle('on',e.target.checked);recalc();save();}));
+
+let cv=$("#cv"),ctx,drawing=false,hasSign=false;
+function size(){ctx=cv.getContext("2d");const r=cv.getBoundingClientRect();const dpr=devicePixelRatio||1;const d=hasSign?cv.toDataURL():null;cv.width=r.width*dpr;cv.height=r.height*dpr;ctx.scale(dpr,dpr);ctx.lineWidth=2.4;ctx.lineCap="round";ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--text").trim();if(d){const im=new Image();im.onload=()=>ctx.drawImage(im,0,0,r.width,r.height);im.src=d;}}
+setTimeout(size,60);addEventListener("resize",size);
+function pos(e){const r=cv.getBoundingClientRect();const p=e.touches?e.touches[0]:e;return{x:p.clientX-r.left,y:p.clientY-r.top};}
+cv.addEventListener("mousedown",e=>{drawing=true;const{x,y}=pos(e);ctx.beginPath();ctx.moveTo(x,y);});
+cv.addEventListener("touchstart",e=>{drawing=true;const{x,y}=pos(e);ctx.beginPath();ctx.moveTo(x,y);e.preventDefault();},{passive:false});
+function draw(e){if(!drawing)return;const{x,y}=pos(e);ctx.lineTo(x,y);ctx.stroke();if(!hasSign){hasSign=true;$("#sign").classList.add("drawn");}}
+cv.addEventListener("mousemove",draw);cv.addEventListener("touchmove",e=>{draw(e);e.preventDefault();},{passive:false});
+addEventListener("mouseup",()=>{if(drawing){drawing=false;save();}});addEventListener("touchend",()=>{if(drawing){drawing=false;save();}});
+$("#clr").onclick=()=>{ctx.clearRect(0,0,cv.width,cv.height);hasSign=false;$("#sign").classList.remove("drawn");save();};
+
+let savedTimer;
+function flashSaved(){const s=$("#saved");s.hidden=false;clearTimeout(savedTimer);savedTimer=setTimeout(()=>s.hidden=true,2000);}
+function save(){try{
+  const d={};TEXT_IDS.forEach(id=>{const el=$("#"+id);if(el)d[id]=el.value;});
+  d.confirmMgmt=$("#confirmMgmt").checked;d.agree=$("#agree").checked;
+  d.checks=$$('.grp .ck input').map(b=>b.checked);d.sign=hasSign?cv.toDataURL():"";
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(d));flashSaved();
+}catch(e){}}
+function restore(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const d=JSON.parse(raw);
+  TEXT_IDS.forEach(id=>{const el=$("#"+id);if(el&&d[id]!=null)el.value=d[id];});
+  if(d.confirmMgmt)$("#confirmMgmt").checked=true;if(d.agree)$("#agree").checked=true;
+  if(Array.isArray(d.checks))$$('.grp .ck input').forEach((b,i)=>{if(d.checks[i]){b.checked=true;b.closest('.ck').classList.add('on');}});
+  if(d.sign){const im=new Image();im.onload=()=>{const r=cv.getBoundingClientRect();ctx&&ctx.drawImage(im,0,0,r.width,r.height);};im.src=d.sign;hasSign=true;$("#sign").classList.add("drawn");}
+}catch(e){}}
+
+const LBL={name:"이름",dept:"부서",join:"입사일",last:"최종 근무일",leave:"퇴사일",phone:"연락처",email:"이메일",addr:"주소",rrn:"주민등록번호"};
+function josa(w,a,b){const c=(w||"").charCodeAt((w||"").length-1)-0xAC00;if(c<0||c>11171)return a;return (c%28)?a:b;}
+function firstMissing(){
+  for(const id of ["name","dept","join","last","leave","phone","email","addr"]){
+    if(!$("#"+id).value.trim())return{el:$("#"+id),msg:`${LBL[id]}${josa(LBL[id],"을","를")} 입력해 주세요.`};
+  }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($("#email").value))return{el:$("#email"),msg:"이메일 형식을 다시 확인해 주세요."};
+  if(!$("#confirmMgmt").checked)return{el:$("#confirmMgmt").closest(".confirm"),msg:"최종근무일·퇴사일을 경영관리팀과 확인했는지 체크해 주세요."};
+  if(!$("#rrn").value.trim())return{el:$("#rrn"),msg:"서약서 확인용 주민등록번호를 입력해 주세요."};
+  if(!$("#agree").checked)return{el:$("#agree").closest(".chk"),msg:"퇴사 서약 내용에 동의해 주세요."};
+  if(!hasSign)return{el:$("#sign"),msg:"서약서에 서명해 주세요."};
+  return null;
+}
+let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),3200);}
+function flash(el){el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600);}
+
+function collect(){
+  const f={};TEXT_IDS.forEach(id=>{const el=$("#"+id);if(el)f[id]=el.value;});
+  return {type:"offboarding",submittedAt:new Date().toISOString(),fields:f,
+    confirmMgmt:$("#confirmMgmt").checked,agree:$("#agree").checked,pledgeDate:PLEDGE_ISO,
+    checks:$$('.grp .ck').map(c=>({t:c.querySelector('.lab').textContent,done:c.querySelector('input').checked})),
+    signature:hasSign?cv.toDataURL():"",files:[]};
+}
+$("#submit").onclick=async()=>{
+  const miss=firstMissing();
+  if(miss){toast(miss.msg);miss.el.scrollIntoView({behavior:"smooth",block:"center"});flash(miss.el);if(miss.el.focus)try{miss.el.focus({preventScroll:true});}catch(e){}return;}
+  const btn=$("#submit");btn.disabled=true;btn.textContent="제출 중...";
+  const data=collect();
+  try{
+    if(SUBMIT_URL)await fetch(SUBMIT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    else{const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=`오프보딩_${data.fields.name||"제출"}.json`;a.click();}
+  }catch(e){}
+  const nm=data.fields.name||"동료";
+  $("#tkTitle").textContent=`${nm}님, 제출이 완료되었습니다`;
+  $("#tkMsg").innerHTML="그동안 감사했습니다.<br>남은 절차는 경영관리팀이 확인 후 안내드릴게요.";
+  $("#takeover").classList.add("show");scrollTo(0,0);
+  btn.textContent="퇴사 절차 정보 제출하기";btn.disabled=false;
+};
+$("#again").onclick=()=>{$("#takeover").classList.remove("show");scrollTo({top:0,behavior:"smooth"});};
+
+restore();sync();recalc();
+</script>
+</body>
+</html>
